@@ -88,10 +88,19 @@ async def save_media_in_channel(bot: Client, editable: Message, message: Message
             f"#PRIVATE_FILE:\n\n[{message.from_user.first_name}](tg://user?id={message.from_user.id}) Got File Link!",
             disable_web_page_preview=True)
         share_link = f"https://t.me/{Config.BOT_USERNAME}?start=AbirHasan2005_{str_to_b64(file_er_id)}"
+        # get media type
+        media_type = message.document or message.video or message.audio or message.photo
+        # get file name
+        file_name = media_type.file_name
+        # get file size in MB
+        file_size = round(media_type.file_size/1024/1024, 3)
+        # get caption (if any)
+        caption = message.caption or ""
+
         await editable.edit(
             "**Your File Stored in my Database!**\n\n"
-            f"Here is the Permanent Link of your file: {share_link} \n\n"
-            "Just Click the link to get your file!",
+            f"<code>{caption}</code>\n\n<b>File Size : {filesize} MB\n\nClick Get video : \n</b><code>{share_link}</code>\n\n"
+            "<b>Share &amp; Support Us! ❤️</b>",
             reply_markup=InlineKeyboardMarkup(
                 [[InlineKeyboardButton("Open Link", url=share_link)],
                  [InlineKeyboardButton("Bots Channel", url="https://t.me/Discovery_Updates"),
