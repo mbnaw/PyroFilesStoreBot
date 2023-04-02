@@ -28,6 +28,10 @@ async def media_forward(bot: Client, user_id: int, file_id: int):
             return await bot.forward_messages(chat_id=user_id, from_chat_id=Config.DB_CHANNEL,
                                               message_ids=file_id)
 
+    except FloodWait as e:
+        await asyncio.sleep(e.value)
+        return media_forward(bot, user_id, file_id)
+
 async def send_media_and_reply(bot: Client, user_id: int, file_id: int):
     sent_message = await media_forward(bot, user_id, file_id)
     await reply_forward(message=sent_message, file_id=file_id)
