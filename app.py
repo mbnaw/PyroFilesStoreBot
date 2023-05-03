@@ -1,3 +1,10 @@
-Flask
+from flask import Flask
 
-Gunicorn
+app = Flask(__name__)
+
+@app.route('/')
+
+def hello_world():
+
+    return 'Hello, World!'
+
