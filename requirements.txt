@@ -5,5 +5,4 @@ aiofiles
 dnspython
 psutil
 Flask
-
 Gunicorn
