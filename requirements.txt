@@ -6,3 +6,4 @@ dnspython
 psutil
 Flask
 Gunicorn
+shortzy
