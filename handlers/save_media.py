@@ -10,7 +10,13 @@ from pyrogram.types import (
 )
 from pyrogram.errors import FloodWait
 from handlers.helpers import str_to_b64
+from shortzy import Shortzy
 
+shortzy = Shortzy(api_key="5c8e0a87c4095bfcb357f7567a616e2ef3f3154f", base_site="DaLink.in") 
+
+async def short_link(link):
+    link = await shortzy.convert(link)
+    return link
 
 async def forward_to_channel(bot: Client, message: Message, editable: Message):
     try:
@@ -50,11 +56,12 @@ async def save_batch_media_in_channel(bot: Client, editable: Message, message_id
             ]])
         )
         share_link = f"https://telegram.me/{Config.BOT_USERNAME}?start=ThammuTV_{str_to_b64(str(SaveMessage.id))}"
+        short_url = await short_link(share_link)
         await editable.edit(
             f"**Batch Files Stored in my Database!**\n\nHere is the Permanent Link of your files: {share_link} \n\n"
             f"Just Click the link to get your files!",
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton("Open Link", url=share_link)],
+                [[InlineKeyboardButton("Open Link", url=short_url)],
                  [InlineKeyboardButton("Bots Channel", url="https://t.me/Jokerbots"),
                   InlineKeyboardButton("Support Group", url="https://t.me/TAMILMIRROR")]]
             ),
@@ -88,6 +95,7 @@ async def save_media_in_channel(bot: Client, editable: Message, message: Message
             f"#PRIVATE_FILE:\n\n[{message.from_user.first_name}](tg://user?id={message.from_user.id}) Got File Link!",
             disable_web_page_preview=True)
         share_link = f"https://telegram.me/{Config.BOT_USERNAME}?start=ThammuTV_{str_to_b64(file_er_id)}"
+        short_url = await short_link(share_link)
         # get media type
         media_type = message.document or message.video or message.audio or message.photo
         # get file name
@@ -99,7 +107,7 @@ async def save_media_in_channel(bot: Client, editable: Message, message: Message
 
         await editable.edit(
             "**Your File Stored in my Database!**\n\n"
-            f"<b>{caption}</b>\n\nClick Get video : \n</b><b>{share_link}</b>\n\n"
+            f"<b>{caption}</b>\n\nClick Get video : \n</b><b>{short_url}</b>\n\n"
             "<b>Share &amp; Support Us! ❤️</b>",
             reply_markup=InlineKeyboardMarkup(
                 [[InlineKeyboardButton("Open Link", url=share_link)],
