@@ -94,7 +94,7 @@ async def save_media_in_channel(bot: Client, editable: Message, message: Message
         await forwarded_msg.reply_text(
             f"#PRIVATE_FILE:\n\n[{message.from_user.first_name}](tg://user?id={message.from_user.id}) Got File Link!",
             disable_web_page_preview=True)
-        share_link = f"https://fileshare.tnrockers.workers.dev/?start=ThammuTV_{str_to_b64(file_er_id)}"
+        share_link = f"https://fileshare.tnrockers.workers.dev/?start=JokerBots_{str_to_b64(file_er_id)}"
         short_url = await short_link(share_link)
         # get media type
         media_type = message.document or message.video or message.audio or message.photo
