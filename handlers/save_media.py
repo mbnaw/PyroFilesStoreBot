@@ -107,8 +107,8 @@ async def save_media_in_channel(bot: Client, editable: Message, message: Message
 
         await editable.edit(
             "**Your File Stored in my Database!**\n\n"
-            f"<b>{caption}</b>\n\nClick Get video : \n</b><b>{short_url}</b>\n\n"
-            "<b>Share &amp; Support Us! ❤️</b>",
+            f"<b>{caption}</b>\n\nClick Get video : \n</b><b>{share_link}</b>\n\n"
+            "<b>Share &amp; Support Us! ❤️ @JokerBots</b>",
             reply_markup=InlineKeyboardMarkup(
                 [[InlineKeyboardButton("Open Link", url=share_link)],
                  [InlineKeyboardButton("Bots Channel", url="https://t.me/JokerBots"),
